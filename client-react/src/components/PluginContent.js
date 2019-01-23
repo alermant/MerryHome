@@ -1,6 +1,6 @@
 import React from 'react';
 import PluginItem from "./PluginItem";
-import VoiceRecognition from './VoiceRecognition';
+import Football from './Football';
 
 export default function PluginContent(props){
     if(props.viewInfo.type==="listItem"){
@@ -11,11 +11,9 @@ export default function PluginContent(props){
                 ))}
             </div>
         );
-    } else if (props.viewInfo.type === "football") {
-        return (
-            <VoiceRecognition></VoiceRecognition>
-        )
-    }else{
+    } else if (props.viewInfo.type==="football") {
+        return <Football></Football>
+    }else {
         return <div></div>;
     }
 }

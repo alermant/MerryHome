@@ -18,8 +18,10 @@ class VoiceRecognition extends Component {
 
     constructor(props){
         super(props);
-        this.state = { expressions: [],
-                       conversation: []};
+        this.state = {
+            expressions: [],
+            conversation: []
+        };
     }
 
     componentWillMount() {
@@ -47,7 +49,6 @@ class VoiceRecognition extends Component {
                 };
             }
         });
-
     }
 
     subscribeServerSays(){

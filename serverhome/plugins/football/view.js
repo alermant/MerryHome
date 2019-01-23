@@ -1,5 +1,5 @@
 var dataView = {
-    "type" : "football",
+    "type" : "listItem",
     "items" : []
 };
 
