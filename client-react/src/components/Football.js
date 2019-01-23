@@ -21,8 +21,8 @@ class Football extends Component {
     render() {
 
         const footballItems = this.state.result.data
-            ? this.state.result.data.map(matche => {
-                return <FootBallItem data={matche}></FootBallItem>
+            ? this.state.result.data.map((matche, index)=> {
+                return <FootBallItem key={index} data={matche}></FootBallItem>
             })
             : [];
         return (
