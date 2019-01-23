@@ -77,7 +77,7 @@ async function getResult(team1, team2, competitionName) {
 async function giveMeResultDate(competitionName, dateMatch) {
     const competitionId = await getCompetitionId(competitionName);
     const {data} = await Axios.get(`competitions/${competitionId}/matches?status=FINISHED`);
-    const matchs = data.matches.map(el => {
+    const matchs = data.matches.filter(el => {
         const date = new Date(el.utcDate);
         let month  = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
         if(`${date.getDate()} ${month} ${date.getFullYear()}` === dateMatch)
