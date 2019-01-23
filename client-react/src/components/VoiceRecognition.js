@@ -10,15 +10,21 @@ const propTypes = {
   // Props injected by SpeechRecognition
   transcript: PropTypes.string,
   resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool
+  browserSupportsSpeechRecognition: PropTypes.bool,
+  recognition: PropTypes.object
 };
 
 class VoiceRecognition extends Component {
-    
+
     constructor(props){
         super(props);
         this.state = { expressions: [],
                        conversation: []};
+    }
+
+    componentWillMount() {
+        const { recognition } = this.props;
+        recognition.lang = 'fr-FR';
     }
 
     componentDidMount(){
@@ -41,9 +47,9 @@ class VoiceRecognition extends Component {
                 };
             }
         });
-        
+
     }
-    
+
     subscribeServerSays(){
         subscribeToEvent("serversays", function (data){
             var utterThis = new SpeechSynthesisUtterance(data);
@@ -52,7 +58,7 @@ class VoiceRecognition extends Component {
             window.speechSynthesis.speak(utterThis);
         });
     }
-    
+
     sendData(objRequest){
         sendRequest(objRequest.plugin, objRequest.action, objRequest.data).then((data)=>{
             if(data.resultText){
@@ -66,11 +72,11 @@ class VoiceRecognition extends Component {
 
     render() {
         const { startListening, stopListening, browserSupportsSpeechRecognition } = this.props;
-        
+
         if(!isConfigured()){
             return <div>Configurer le server de merry home ;)</div>;
         }
-        
+
         if (!browserSupportsSpeechRecognition) {
             return <div>Pour utiliser la reconnaissance vocale, merci d'utiliser google chrome ;)</div>;
         }
@@ -78,8 +84,8 @@ class VoiceRecognition extends Component {
         return (
             <div>
                <Glyphicon glyph="comment" className={"voice-icon "+(this.props.listening  ? "listening" : "")} />
-               { this.props.listening  ? 
-                <Button bsStyle="danger" onClick={stopListening}><Glyphicon glyph="stop" /> stop </Button> : 
+               { this.props.listening  ?
+                <Button bsStyle="danger" onClick={stopListening}><Glyphicon glyph="stop" /> stop </Button> :
                 <Button bsStyle="info" onClick={startListening }><Glyphicon glyph="play" /> start </Button> }
             </div>
         );
@@ -89,7 +95,8 @@ class VoiceRecognition extends Component {
 VoiceRecognition.propTypes = propTypes;
 
 const options = {
-  autoStart: false
+  autoStart: false,
+  lang: 'fr-FR'
 };
 
 export default SpeechRecognition(options)(VoiceRecognition);
