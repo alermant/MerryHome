@@ -2,5 +2,5 @@
     "next-match-competition" : "donne-moi le prochain match de la (?P<competition>.+)",
     "give-me-every-match-from" : "donne-moi tous les matchs de la (?P<competition>.+)",
     "give-me-result" : "donne-moi le résultat (?P<equipe1>.+) contre (?P<equipe2>.+) de la (?P<competition>.+)",
-    "give-me-result-date": "donne-moi le résultat de la (?P<competition>.+) du (?P<date>.+)"
+    "give-me-result-date": "donne-moi les résultats de la (?P<competition>.+) du (?P<date>.+)"
 }
