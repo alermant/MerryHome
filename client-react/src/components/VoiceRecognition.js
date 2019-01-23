@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 import {isConfigured} from '../utils/authservice'
-import { Button, Glyphicon } from 'react-bootstrap'
 import SpeechRecognition from 'react-speech-recognition'
 
 import {getExpressions, sendRequest, subscribeToEvent} from '../utils/serverhome-api'
@@ -88,11 +87,12 @@ class VoiceRecognition extends Component {
         }
 
         return (
-            <div>
-               <Glyphicon glyph="comment" className={"voice-icon "+(this.props.listening  ? "listening" : "")} />
-               { this.props.listening  ?
-                <Button bsStyle="danger" onClick={stopListening}><Glyphicon glyph="stop" /> stop </Button> :
-                <Button bsStyle="info" onClick={startListening }><Glyphicon glyph="play" /> start </Button> }
+            <div className="block-voice">
+                <div className={"foot-voice "+(this.props.listening  ? "listening" : "")} >
+                { this.props.listening  ?
+                    <svg className='svg svg-stop' onClick={stopListening} xmlns="http://www.w3.org/2000/svg" height="448pt" viewBox="0 0 448 448" width="448pt"><path d="m224 248c13.253906 0 24-10.746094 24-24v-120c0-13.253906-10.746094-24-24-24s-24 10.746094-24 24v120c0 13.253906 10.746094 24 24 24zm0 0"/><path d="m224 0c-123.710938 0-224 100.289062-224 224s100.289062 224 224 224 224-100.289062 224-224c-.140625-123.652344-100.347656-223.859375-224-224zm-40 104c0-22.089844 17.910156-40 40-40s40 17.910156 40 40v120c0 22.089844-17.910156 40-40 40s-40-17.910156-40-40zm48 207.59375v72.40625h40v16h-96v-16h40v-72.40625c-45.277344-4.171875-79.941406-42.125-80-87.59375h16c0 39.765625 32.234375 72 72 72s72-32.234375 72-72h16c-.058594 45.46875-34.722656 83.421875-80 87.59375zm0 0"/></svg> :
+                    <svg className='svg svg-start' onClick={startListening} xmlns="http://www.w3.org/2000/svg" height="448pt" viewBox="0 0 448 448" width="448pt"><path d="m224 248c13.253906 0 24-10.746094 24-24v-120c0-13.253906-10.746094-24-24-24s-24 10.746094-24 24v120c0 13.253906 10.746094 24 24 24zm0 0"/><path d="m224 0c-123.710938 0-224 100.289062-224 224s100.289062 224 224 224 224-100.289062 224-224c-.140625-123.652344-100.347656-223.859375-224-224zm-40 104c0-22.089844 17.910156-40 40-40s40 17.910156 40 40v120c0 22.089844-17.910156 40-40 40s-40-17.910156-40-40zm48 207.59375v72.40625h40v16h-96v-16h40v-72.40625c-45.277344-4.171875-79.941406-42.125-80-87.59375h16c0 39.765625 32.234375 72 72 72s72-32.234375 72-72h16c-.058594 45.46875-34.722656 83.421875-80 87.59375zm0 0"/></svg> }
+                </div>
             </div>
         );
     };

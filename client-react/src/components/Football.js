@@ -26,9 +26,9 @@ class Football extends Component {
             })
             : [];
         return (
-            <div>
+            <div className="content">
                 <VoiceRecognition changeResult={this.changeResult}></VoiceRecognition>
-                <div>{footballItems}</div>
+                <div className="block-match">{footballItems}</div>
             </div>
         );
     }
