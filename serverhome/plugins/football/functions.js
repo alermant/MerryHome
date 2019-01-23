@@ -1,4 +1,5 @@
 const Axios = require('axios');
+const levenshtein = require('js-levenshtein');
 Axios.defaults.baseURL = 'http://api.football-data.org/v2/'
 Axios.defaults.headers.common['X-Auth-Token'] = process.env.API_KEY_FOOTBALL
 
@@ -50,8 +51,19 @@ async function getEveryMatch(competitionName) {
 async function getResult(team1, team2, competitionName) {
     const competitionId = await getCompetitionId(competitionName);
     const {data} = await Axios.get(`competitions/${competitionId}/matches?status=FINISHED`);
-    const matchs = data.matches
-        .find(el => el.homeTeam.name.toUpperCase() === team1.toUpperCase() && el.awayTeam.name.toUpperCase() === team2.toUpperCase());
+    const teamName1 = team1.toUpperCase();
+    const teamName2 = team2.toUpperCase();
+
+    const findTeam = (el) => {
+        const team1 = el.homeTeam.name.toUpperCase();
+        const team2 = el.awayTeam.name.toUpperCase();
+
+        const team1VsTeam2 = levenshtein(team1, teamName1) <= 1 && levenshtein(team2, teamName2) <= 1;
+        const team2VsTeam1 = levenshtein(team2, teamName1) <= 1 && levenshtein(team1, teamName2) <= 1;
+
+        return team1VsTeam2 || team2VsTeam1;
+    }
+    const matchs = data.matches.find(findTeam);
     if (!matchs) {
         throw new Error(`Je n'ai pas trouvé de résultat`);
     }
