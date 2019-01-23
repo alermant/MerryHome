@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import moment from 'moment';
 
 class FootballItem extends Component {
 
@@ -6,13 +7,13 @@ class FootballItem extends Component {
         const { data } = this.props;
         return (
             <div className="match">
-                <div className="datematch">{ data.utcDate }</div>
+                <div className="datematch">{ moment(data.utcDate).format('MMMM Do YYYY, h:mm:ss a') }</div>
                 <div className="block block-left">
                     <div className="block-team">
                         <div className="name hometeam">{ data.homeTeam.name }</div>
                         <div className="score">
                             { data.score.fullTime.homeTeam }
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div className="block block-right">
@@ -24,7 +25,7 @@ class FootballItem extends Component {
                     </div>
                 </div>
                 <div className="journee"><span>Journée : </span>{ data.matchday }</div>
-            </div> 
+            </div>
         );
     }
 };

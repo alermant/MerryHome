@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.24.0",
     "pcre-to-regexp": "0.0.4",
     "react": "^15.1.1",
     "react-bootstrap": "^0.32.4",

@@ -25,10 +25,7 @@ async function getNextMatch(competitionName) {
     const date = new Date(matche.utcDate);
 
     return {
-        resultText: `Le prochain match est prévu le
-            ${date.getDate()} ${date.getMonth()+1} ${date.getFullYear()}
-            à ${date.getHours()} ${date.getHours()} ${date.getMinutes() > 0 ? date.getMinutes() : ''} ${date.getFullYear()},
-            ${matche.homeTeam.name} contre ${matche.awayTeam.name}`,
+        resultText: `Le prochain match prévu est ${matche.homeTeam.name} contre ${matche.awayTeam.name}`,
         data: [matche]
     }
 }
