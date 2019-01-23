@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import VoiceRecognition from './VoiceRecognition';
+import FootBallItem from './FootballItem';
 
 class Football extends Component {
 
@@ -18,10 +19,16 @@ class Football extends Component {
     }
 
     render() {
+
+        const footballItems = this.state.result.data
+            ? this.state.result.data.map(matche => {
+                return <FootBallItem data={matche}></FootBallItem>
+            })
+            : [];
         return (
             <div>
                 <VoiceRecognition changeResult={this.changeResult}></VoiceRecognition>
-                <div>{ JSON.stringify(this.state.result) }</div>
+                <div>{footballItems}</div>
             </div>
         );
     }
