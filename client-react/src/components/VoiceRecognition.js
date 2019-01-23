@@ -18,6 +18,7 @@ class VoiceRecognition extends Component {
 
     constructor(props){
         super(props);
+        this.props = props;
         this.state = {
             expressions: [],
             conversation: []
@@ -66,6 +67,10 @@ class VoiceRecognition extends Component {
                 var utterThis = new SpeechSynthesisUtterance(data.resultText);
                 utterThis.lang = 'fr-FR';
                 console.log({"response":data.resultText});
+                if (this.props.changeResult) {
+                    console.log('on envoit le resultat au parent');
+                    this.props.changeResult(data);
+                }
                 window.speechSynthesis.speak(utterThis);
             }
         });
